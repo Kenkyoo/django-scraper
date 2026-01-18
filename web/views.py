@@ -29,7 +29,8 @@ def home(request):
         "imagenes": imagenes,
         "url": url
     })
-    def registro(request):
+
+def registro(request):
         if request.method == 'POST':
             form = UserCreationForm(request.POST)
             if form.is_valid():

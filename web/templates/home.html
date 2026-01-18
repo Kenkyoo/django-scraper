@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Scraper</title>
+    </head>
+    <body>
+        <h2>Extraer imágenes</h2>
+
+        <form method="get">
+            <input
+                type="text"
+                name="url"
+                placeholder="https://ejemplo.com"
+                value="{{ url }}"
+            />
+            <button>Buscar</button>
+        </form>
+
+        {% for img in imagenes %}<img src="{{ img }}" alt="Imagen" />{% endfor%}
+    </body>
+</html>

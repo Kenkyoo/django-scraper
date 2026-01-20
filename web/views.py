@@ -69,3 +69,8 @@ def login_view(request):
             login(request, user)
             return redirect("home")
     return render(request, "login.html")
+
+
+def favorites(request):
+    favorites = Favorite.objects.filter(user=request.user)
+    return render(request, "favorites.html", {"favorites": favorites})

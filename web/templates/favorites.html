@@ -1,0 +1,6 @@
+<h1>Favorites</h1>
+
+{% for favorite in favorites %}
+<img src="{{ favorite.image.url }}" />
+<p>Guardado el: {{ favorite.date }}</p>
+{% endfor %}

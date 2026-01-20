@@ -17,6 +17,12 @@
             <button>Buscar</button>
         </form>
 
-        {% for img in imagenes %}<img src="{{ img }}" alt="Imagen" />{% endfor%}
+        {% for img in imagenes %}<img src="{{ img }}" alt="Imagen" />
+        <form method="post" action="{% url 'save_favorite' %}">
+            {% csrf_token %}
+            <input type="hidden" name="image_url" value="{{ img }}" />
+            <button>❤️ Guardar</button>
+        </form>
+        {% endfor%}
     </body>
 </html>

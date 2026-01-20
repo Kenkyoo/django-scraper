@@ -6,7 +6,7 @@ from .views import home, save_favorite
 
 urlpatterns = [
     path("", home, name="home"),
-    path("registro/", views.registro, name="registro"),
+    path("register/", views.registro, name="register"),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("favorite/", save_favorite, name="save_favorite"),

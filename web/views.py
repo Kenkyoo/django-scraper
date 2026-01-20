@@ -12,7 +12,7 @@ from .models import Favorite, Image
 
 
 @login_required
-def save_favorite(request, image_url):
+def save_favorite(request):
     if request.method == "POST":
         image_url = request.POST.get("image_url")
 
@@ -57,7 +57,7 @@ def registro(request):
             return redirect("home")
     else:
         form = UserCreationForm()
-    return render(request, "registro.html", {"form": form})
+    return render(request, "register.html", {"form": form})
 
 
 def login_view(request):

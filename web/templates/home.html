@@ -3,26 +3,90 @@
     <head>
         <meta charset="utf-8" />
         <title>Scraper</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+        />
     </head>
     <body>
-        <h2>Extraer imágenes</h2>
+        <nav class="navbar">
+            <div class="container">
+                <div id="navMenu" class="navbar-menu">
+                    <div class="navbar-start">
+                        <a class="navbar-item"> Home </a>
+                        <a class="navbar-item"> Documentation </a>
+                    </div>
 
-        <form method="get">
-            <input
-                type="text"
-                name="url"
-                placeholder="https://ejemplo.com"
-                value="{{ url }}"
-            />
-            <button>Buscar</button>
-        </form>
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button is-dark">Github</a>
+                                <a class="button is-link">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-        {% for img in imagenes %}<img src="{{ img }}" alt="Imagen" />
-        <form method="post" action="{% url 'save_favorite' %}">
-            {% csrf_token %}
-            <input type="hidden" name="image_url" value="{{ img }}" />
-            <button>❤️ Guardar</button>
-        </form>
-        {% endfor%}
+        <section class="hero is-link is-fullheight-with-navbar">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <p class="title">Fullheight hero with navbar</p>
+                    <div
+                        class="field has-addons is-flex is-justify-content-center"
+                    >
+                        <form method="get">
+                            <div class="control mb-2">
+                                <input
+                                    class="input is-medium"
+                                    type="text"
+                                    name="url"
+                                    placeholder="https://ejemplo.com"
+                                    value="{{ url }}"
+                                />
+                            </div>
+                            <div class="control">
+                                <button class="button is-info">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="px-5 my-3">
+            <div class="fixed-grid has-4-cols">
+                <div class="grid">
+                    {% for img in imagenes %}
+                    <div class="cell">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-4by3">
+                                    <img
+                                        src="{{ img }}"
+                                        alt="Placeholder image"
+                                    />
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <form
+                                    method="post"
+                                    action="{% url 'save_favorite' %}"
+                                >
+                                    {% csrf_token %}
+                                    <input
+                                        type="hidden"
+                                        name="image_url"
+                                        value="{{ img }}"
+                                    />
+                                    <button>❤️ Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
     </body>
 </html>

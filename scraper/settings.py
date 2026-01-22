@@ -132,3 +132,8 @@ STATIC_URL = "static/"
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/favorites"
+
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+CSRF_TRUSTED_ORIGINS = ["https://*.railway.app"]

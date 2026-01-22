@@ -22,10 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-grb89f#7jn&rhuht57eenhp(v1%6=w!88p7^p=5o^%(qtr-ps3"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ALLOWED_HOSTS = ["*"]
 
-ALLOWED_HOSTS = []
+# Configuración para Railway
+if "RAILWAY_ENVIRONMENT" in os.environ:
+    DEBUG = False
+else:
+    DEBUG = True
 
 
 # Application definition

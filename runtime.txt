@@ -1,0 +1,6 @@
+python-3.12.0
+```
+
+## 4. Crear `Procfile`:
+```
+web: gunicorn scraper.wsgi --log-file -

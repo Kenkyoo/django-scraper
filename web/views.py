@@ -35,6 +35,13 @@ def delete_favorite(request):
     return redirect("favorites")
 
 
+@login_required
+def delete_all_favorites(request):
+    if request.method == "POST":
+        Favorite.objects.filter(user=request.user).delete()
+    return redirect("favorites")
+
+
 def home(request):
     imagenes = []
     url = request.GET.get("url")

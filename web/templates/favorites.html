@@ -1,6 +1,107 @@
-<h1>Favorites</h1>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Scraper</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+        />
+    </head>
+    <body>
+        <nav class="navbar is-dark">
+            <div class="container">
+                <div id="navMenu" class="navbar-menu">
+                    <div class="navbar-start">
+                        <a href="/" class="navbar-item"> Home </a>
+                        <a href="/favorites" class="navbar-item"> Favorites </a>
+                    </div>
 
-{% for favorite in favorites %}
-<img src="{{ favorite.image.url }}" />
-<p>Guardado el: {{ favorite.date }}</p>
-{% endfor %}
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                {% if user.is_authenticated %}
+                                <a
+                                    href="{% url 'logout' %}"
+                                    class="button is-danger"
+                                    >Cerrar sesión</a
+                                >
+                                {% else %}
+                                <a
+                                    href="{% url 'login' %}"
+                                    class="button is-dark"
+                                    >Login</a
+                                >
+                                <a
+                                    href="{% url 'register' %}"
+                                    class="button is-info"
+                                    >Register</a
+                                >
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section data-theme="dark" class="hero is-fullheight-with-navbar">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <p class="title mb-5">My Favorites</p>
+                </div>
+            </div>
+        </section>
+        <section class="px-5 my-3">
+            <div class="fixed-grid has-4-cols">
+                <div class="grid">
+                    {% for favorite in favorites %}
+                    <div class="cell">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-4by3">
+                                    <img
+                                        src="{{  favorite.image.url }}"
+                                        alt="Placeholder image"
+                                    />
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <form
+                                    method="post"
+                                    action="{% url 'delete_favorite' %}"
+                                >
+                                    {% csrf_token %}
+                                    <input
+                                        type="hidden"
+                                        name="image_url"
+                                        value="{{ favorite.image.url }}"
+                                    />
+                                    <button
+                                        type="submit"
+                                        class="button is-danger"
+                                    >
+                                        Eliminar
+                                    </button>
+                                </form>
+                                <p class="mt-2 has-centered-text">
+                                    Guardado el: {{ favorite.date }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <footer class="footer is-dark">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>Scraper</strong> by
+                    <a href="https://jgthms.com">Kenkyo</a>. Make with a lot of
+                    love
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -14,20 +14,30 @@
                 <div id="navMenu" class="navbar-menu">
                     <div class="navbar-start">
                         <a href="/" class="navbar-item"> Home </a>
-                        <a href="/documentation" class="navbar-item">
-                            Documentation
-                        </a>
+                        <a href="/favorites" class="navbar-item"> Favorites </a>
                     </div>
 
                     <div class="navbar-end">
                         <div class="navbar-item">
                             <div class="buttons">
-                                <a href="/login" class="button is-dark"
+                                {% if user.is_authenticated %}
+                                <a
+                                    href="{% url 'logout' %}"
+                                    class="button is-danger"
+                                    >Cerrar sesión</a
+                                >
+                                {% else %}
+                                <a
+                                    href="{% url 'login' %}"
+                                    class="button is-dark"
                                     >Login</a
                                 >
-                                <a href="/register" class="button is-info"
+                                <a
+                                    href="{% url 'register' %}"
+                                    class="button is-info"
                                     >Register</a
                                 >
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -100,15 +110,9 @@
         <footer class="footer is-dark">
             <div class="content has-text-centered">
                 <p>
-                    <strong>Bulma</strong> by
-                    <a href="https://jgthms.com">Jeremy Thomas</a>. The source
-                    code is licensed
-                    <a href="https://opensource.org/license/mit">MIT</a>. The
-                    website content is licensed
-                    <a
-                        href="https://creativecommons.org/licenses/by-nc-sa/4.0//"
-                        >CC BY NC SA 4.0</a
-                    >.
+                    <strong>Scraper</strong> by
+                    <a href="https://jgthms.com">Kenkyo</a>. Make with a lot of
+                    love ❤️❤️❤️
                 </p>
             </div>
         </footer>

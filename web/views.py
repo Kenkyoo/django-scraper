@@ -20,7 +20,19 @@ def save_favorite(request):
             image, _ = Image.objects.get_or_create(url=image_url)
             Favorite.objects.create(user=request.user, image=image)
 
-    return redirect("home")
+    return redirect("favorites")
+
+
+@login_required
+def delete_favorite(request):
+    if request.method == "POST":
+        image_url = request.POST.get("image_url")
+
+        if image_url:
+            image = Image.objects.get(url=image_url)
+            Favorite.objects.filter(user=request.user, image=image).delete()
+
+    return redirect("favorites")
 
 
 def home(request):
@@ -49,6 +61,9 @@ def home(request):
 
 
 def registro(request):
+    if request.user.is_authenticated:
+        return redirect("home")
+
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -61,6 +76,9 @@ def registro(request):
 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect("home")
+
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -71,6 +89,7 @@ def login_view(request):
     return render(request, "login.html")
 
 
+@login_required
 def favorites(request):
     favorites = Favorite.objects.filter(user=request.user)
     return render(request, "favorites.html", {"favorites": favorites})
